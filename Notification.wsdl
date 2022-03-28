@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='utf-8'?>
+<wsdl:definitions
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:tns="efood.service.notification"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:ns1="http://schemas.xmlsoap.org/soap/http"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:user_schema="efood.schema.notification"
+	name="NotificationService"
+	targetNamespace="efood.service.notification">
+	<wsdl:types>
+		<xs:schema>
+			<xs:import schemaLocation="notification.xsd" namespace="efood.schema.notification"></xs:import>
+			
+		<!--<xs:import schemaLocation="member.xsd" namespace="efood.schema.member"></xs:import>-->
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="getNotification">
+		<wsdl:part name="notificationId" element="user_schema:notificationId"></wsdl:part>
+		
+
+	</wsdl:message>
+	
+	<wsdl:message name="showNotification">
+		<wsdl:part name="notificationMessage" element="user_schema:notificationMessage"></wsdl:part>
+
+	</wsdl:message>
+
+
+	<wsdl:portType name="UserPortType">
+		<!-- The 'UserInformation' function will take id,name and age as input and will return user id. -->
+		<wsdl:operation name="notificationInformation">
+			<wsdl:input message="tns:getNotification" name="getNotification"></wsdl:input>
+			<wsdl:output message="tns:showNotification" name="showNotification"></wsdl:output>
+			
+		</wsdl:operation>
+
+
+	</wsdl:portType>
+
+
+
+	<wsdl:binding name="NotificationService" type="tns:UserPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="notificationInformation">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input name="getNotification">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="showNotification">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+	</wsdl:binding>
+
+	<wsdl:service name="Notification">
+		<wsdl:port binding="tns:NotificationService" name="ShowNotificationInformationPort">
+			<soap:address location="http://localhost:8080/show/"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
